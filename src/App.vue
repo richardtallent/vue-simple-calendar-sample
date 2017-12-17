@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-month 1.8.0-beta.1</h1>
+			<h1>vue-calendar-month 1.8.0</h1>
 
 			<p>Below is an example of vue-calendar-month. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
@@ -39,7 +39,7 @@
 
 <script>
 import CalendarMonth from "vue-simple-calendar"
-import CalendarMathMixin from "vue-simple-calendar/src/CalendarMathMixin.js"
+import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
 require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
@@ -47,6 +47,7 @@ export default {
 	name: "App",
 	components: {
 		CalendarMonth,
+		CalendarMathMixin,
 	},
 	data() {
 		return {
@@ -133,7 +134,9 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			return CalendarMathMixin.methods.getDefaultBrowserLocale()
+			// eslint-disable-next-line no-console
+			console.log(CalendarMathMixin)
+			return CalendarMathMixin.methods.getDefaultBrowserLocale
 		},
 		dayNames() {
 			return CalendarMathMixin.methods.getFormattedWeekdayNames(

@@ -32,7 +32,7 @@
 			:enable-drag-drop="true"
 			:starting-day-of-week="startingDayOfWeek"
 			@dropEventOnDate="onDrop"
-			:events="events"><span slot="dayList"/></calendar-month>
+			:events="events"/>
 
 	</div>
 </template>

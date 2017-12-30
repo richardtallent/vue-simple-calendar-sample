@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-month 1.8.0</h1>
+			<h1>vue-calendar-month 1.8.2</h1>
 
 			<p>Below is an example of vue-calendar-month. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
@@ -32,7 +32,7 @@
 			:enable-drag-drop="true"
 			:starting-day-of-week="startingDayOfWeek"
 			@dropEventOnDate="onDrop"
-			:events="events"/>
+			:events="events"><span slot="dayList"/></calendar-month>
 
 	</div>
 </template>
@@ -42,6 +42,12 @@ import CalendarMonth from "vue-simple-calendar"
 import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
 require("vue-simple-calendar/dist/static/css/holidays-us.css")
+
+// For live testing while making changes to the component
+//import CalendarMonth from "../../vue-simple-calendar/src/CalendarMonth"
+//import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
+//require("../../vue-simple-calendar/static/css/default.css")
+//require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",
@@ -60,7 +66,6 @@ export default {
 				{
 					id: "e1",
 					startDate: this.thisMonth(15),
-					endDate: this.thisMonth(15),
 					title: "Single-day event with a long title",
 				},
 				{
@@ -72,7 +77,6 @@ export default {
 				{
 					id: "e3",
 					startDate: this.thisMonth(20),
-					endDate: this.thisMonth(20),
 					title: "My Birthday!",
 					classes: "birthday",
 					url: "https://en.wikipedia.org/wiki/Birthday",
@@ -87,46 +91,39 @@ export default {
 				{
 					id: "e5",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 1",
 				},
 				{
 					id: "e6",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 2",
 					classes: "orange",
 				},
 				{
 					id: "e7",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 3",
 				},
 				{
 					id: "e8",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 4",
 					classes: "orange",
 				},
 				{
 					id: "e9",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 5",
 				},
 				{
 					id: "e10",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 6",
 					classes: "orange",
 				},
 				{
 					id: "e11",
 					startDate: this.thisMonth(29),
-					endDate: this.thisMonth(29),
 					title: "Same day 7",
 				},
 			],

@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-month 1.8.2</h1>
+			<h1>vue-calendar-view 1.8.2</h1>
 
-			<p>Below is an example of vue-calendar-month. You can drag and drop events to change the start date (this
+			<p>Below is an example of vue-calendar-view. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
 
 			<p>Note that this demo page has some examples of custom styles -- the holiday icons. As you can see from the source,
@@ -14,6 +14,22 @@
 
 			<button @click="clickTestAddEvent" :disabled="alreadyAdded">Add Event on 22nd-23rd</button>
 
+			<p>Period UOM:
+					<select v-model="displayPeriodUom">
+						<option>month</option>
+						<option>week</option>
+						<option>year</option>
+					</select>
+			</p>
+
+			<p>Period Count:
+					<select v-model="displayPeriodCount">
+						<option :value="1">1</option>
+						<option :value="2">2</option>
+						<option :value="3">3</option>
+					</select>
+			</p>
+
 			<p>Starting day of the week: <select v-model="startingDayOfWeek">
 				<option
 					v-for="(d, index) in dayNames"
@@ -23,13 +39,19 @@
 
 		</div>
 		
-		<calendar-month
+		<calendar-view
 			class="holiday-us-traditional holiday-us-official"
 			:show-date="showDate"
 			@clickDay="onClickDay"
 			@clickEvent="onClickEvent"
 			@setShowDate="setShowDate"
+			:time-format-options="{hour: 'numeric', minute:'2-digit'}"
 			:enable-drag-drop="true"
+			:disable-past="disablePast"
+			:disable-future="disableFuture"
+			:show-event-times="showEventTimes"
+			:display-period-uom="displayPeriodUom"
+			:display-period-count="displayPeriodCount"
 			:starting-day-of-week="startingDayOfWeek"
 			@dropEventOnDate="onDrop"
 			:events="events"/>
@@ -38,13 +60,13 @@
 </template>
 
 <script>
-import CalendarMonth from "vue-simple-calendar"
+import CalendarView from "vue-simple-calendar"
 import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
 require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
 // For live testing while making changes to the component
-//import CalendarMonth from "../../vue-simple-calendar/src/CalendarMonth"
+//import CalendarView from "../../vue-simple-calendar/src/CalendarView"
 //import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 //require("../../vue-simple-calendar/static/css/default.css")
 //require("../../vue-simple-calendar/static/css/holidays-us.css")
@@ -52,7 +74,7 @@ require("vue-simple-calendar/dist/static/css/holidays-us.css")
 export default {
 	name: "App",
 	components: {
-		CalendarMonth,
+		CalendarView,
 		CalendarMathMixin,
 	},
 	data() {
@@ -62,7 +84,20 @@ export default {
 			message: "Click a date or event...",
 			alreadyAdded: false,
 			startingDayOfWeek: 0,
+			disablePast: false,
+			disableFuture: false,
+			displayPeriodUom: "month",
+			displayPeriodCount: 1,
+			showEventTimes: true,
 			events: [
+				{
+					id: "e0",
+					startDate: "2018-01-05",
+				},
+				{
+					id: "e99",
+					startDate: this.thisMonth(15, 18, 30),
+				},
 				{
 					id: "e1",
 					startDate: this.thisMonth(15),
@@ -70,9 +105,9 @@ export default {
 				},
 				{
 					id: "e2",
-					startDate: this.thisMonth(7),
-					endDate: this.thisMonth(10),
-					title: "Multi-day event with a long title",
+					startDate: this.thisMonth(7, 9, 25),
+					endDate: this.thisMonth(10, 16, 30),
+					title: "Multi-day event with a long title and times",
 				},
 				{
 					id: "e3",
@@ -131,8 +166,6 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			// eslint-disable-next-line no-console
-			console.log(CalendarMathMixin)
 			return CalendarMathMixin.methods.getDefaultBrowserLocale
 		},
 		dayNames() {
@@ -144,9 +177,9 @@ export default {
 		},
 	},
 	methods: {
-		thisMonth: d => {
+		thisMonth(d, h, m) {
 			const t = new Date()
-			return new Date(t.getFullYear(), t.getMonth(), d)
+			return new Date(t.getFullYear(), t.getMonth(), d, h || 0, m || 0)
 		},
 		onClickDay(d) {
 			this.message = `You clicked: ${d.toLocaleDateString()}`
@@ -159,11 +192,23 @@ export default {
 			this.showDate = d
 		},
 		onDrop(event, date) {
-			this.message = `You dropped ${event} on ${date.toLocaleDateString()}`
-			const e = this.events.filter(ev => ev.id === event)[0]
-			const eLength = CalendarMathMixin.methods.dayDiff(e.startDate, e.endDate)
-			e.startDate = date
-			e.endDate = CalendarMathMixin.methods.addDays(date, eLength)
+			this.message = `You dropped ${event.id} on ${date.toLocaleDateString()}`
+			// Before handling drag/drop date math, need to convert string dates to
+			// local dates and coalesce endDate to startDate.
+			const fixedStartDate = CalendarMathMixin.methods.toLocalDate(
+				event.startDate
+			)
+			const fixedEndDate = CalendarMathMixin.methods.toLocalDate(
+				event.endDate || fixedStartDate
+			)
+			// Determine the delta between the old start date and the date chosen,
+			// and apply that delta to both the start and end date to move the event.
+			const eLength = CalendarMathMixin.methods.dayDiff(fixedStartDate, date)
+			event.startDate = CalendarMathMixin.methods.addDays(
+				fixedStartDate,
+				eLength
+			)
+			event.endDate = CalendarMathMixin.methods.addDays(fixedEndDate, eLength)
 		},
 		clickTestAddEvent() {
 			if (this.alreadyAdded) return
@@ -189,22 +234,35 @@ body {
 #app {
 	font-family: Calibri;
 	width: 90vw;
-	height: 90vw;
 	min-width: 30em;
 	max-width: 100em;
 	min-height: 40em;
-	max-height: 75em;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
+	max-height: 100vh;
 	flex-direction: column;
 }
 .app-description {
 	flex: 0 1 auto;
 }
-.calendar-month {
+.calendar-view {
 	flex: 1 1 auto;
 	margin-bottom: 1em;
+}
+
+.calendar-view.period-week,
+.calendar-view.period-month.periodCount-1 {
+	height: 60vw;
+}
+
+.calendar-view.period-month.periodCount-2,
+.calendar-view.period-month.periodCount-3 {
+	height: 150vw;
+}
+
+.calendar-view.period-year {
+	height: 500vw;
 }
 
 /*

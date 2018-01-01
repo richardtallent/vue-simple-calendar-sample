@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"description": "Sample app showing off the vue-simple-calendar component",
 	"author": "richardtallent <richard@tallent.us>",
 	"license": "MIT",
@@ -12,7 +12,7 @@
 		"build": "node build/build.js"
 	},
 	"dependencies": {
-		"vue-simple-calendar": "^1.8.2"
+		"vue-simple-calendar": "^2.0.0"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.2.3",
@@ -34,7 +34,7 @@
 		"eslint-loader": "^1.9.0",
 		"eslint-plugin-html": "^4.0.1",
 		"eslint-plugin-import": "^2.8.0",
-		"eslint-plugin-vue": "^4.0.0-beta.4",
+		"eslint-plugin-vue": "^4.0.0",
 		"eventsource-polyfill": "^0.9.6",
 		"express": "^4.16.2",
 		"extract-text-webpack-plugin": "^3.0.2",
@@ -53,7 +53,7 @@
 		"stylelint-config-standard": "^18.0.0",
 		"url-loader": "^0.6.2",
 		"vue": "^2.5.13",
-		"vue-loader": "^13.6.1",
+		"vue-loader": "^13.6.2",
 		"vue-style-loader": "^3.0.3",
 		"vue-template-compiler": "^2.5.13",
 		"webpack": "^3.10.0",

@@ -25,3 +25,4 @@ npm run build
 | ---------- | ------- | ---------------------------------- |
 | 2017.12.17 | 1.0.0   | Split from the main component repo (using 1.8.0) |
 | 2017.12.30 | 1.0.1   | Upgrade component to 1.8.2 |
+| 2018.01.01 | 2.0.0   | Upgrade component to 2.0.0 |

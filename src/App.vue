@@ -1,14 +1,14 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 1.8.2</h1>
+			<h1>vue-calendar-view 2.0.0</h1>
 
-			<p>Below is an example of vue-calendar-view. You can drag and drop events to change the start date (this
+			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
 
-			<p>Note that this demo page has some examples of custom styles -- the holiday icons. As you can see from the source,
-				it's easy to customize the style to meet your needs. I've purposefully tried to choose defaults that are modern
-				and clean without getting so complicated that they would be difficult to override.</p>
+			<p>Note that this demo page has some examples of custom styles -- the holiday icons. As you can see from the
+				source, it's easy to customize the style to meet your needs. I've purposefully tried to choose defaults
+				that are modern and clean without getting so complicated that they would be difficult to override.</p>
 
 			<h3>{{ message }}</h3>
 

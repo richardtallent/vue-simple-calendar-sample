@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Sample app showing off the vue-simple-calendar component",
 	"author": "richardtallent <richard@tallent.us>",
 	"license": "MIT",
@@ -12,10 +12,10 @@
 		"build": "node build/build.js"
 	},
 	"dependencies": {
-		"vue-simple-calendar": "^2.0.0"
+		"vue-simple-calendar": "^2.0.1"
 	},
 	"devDependencies": {
-		"autoprefixer": "^7.2.3",
+		"autoprefixer": "^7.2.5",
 		"babel-core": "^6.26.0",
 		"babel-loader": "^7.1.2",
 		"babel-plugin-transform-runtime": "^6.23.0",
@@ -27,14 +27,14 @@
 		"copy-webpack-plugin": "^4.3.1",
 		"cross-env": "^5.1.3",
 		"cross-spawn": "^5.1.0",
-		"css-loader": "^0.28.7",
-		"eslint": "^4.14.0",
+		"css-loader": "^0.28.9",
+		"eslint": "^4.16.0",
 		"eslint-friendly-formatter": "^3.0.0",
-		"eslint-import-resolver-webpack": "^0.8.3",
+		"eslint-import-resolver-webpack": "^0.8.4",
 		"eslint-loader": "^1.9.0",
 		"eslint-plugin-html": "^4.0.1",
 		"eslint-plugin-import": "^2.8.0",
-		"eslint-plugin-vue": "^4.0.0",
+		"eslint-plugin-vue": "^4.2.0",
 		"eventsource-polyfill": "^0.9.6",
 		"express": "^4.16.2",
 		"extract-text-webpack-plugin": "^3.0.2",
@@ -42,23 +42,23 @@
 		"friendly-errors-webpack-plugin": "^1.6.1",
 		"html-webpack-plugin": "^2.30.1",
 		"http-proxy-middleware": "^0.17.4",
-		"opn": "^5.1.0",
+		"opn": "^5.2.0",
 		"optimize-css-assets-webpack-plugin": "^3.2.0",
 		"ora": "^1.3.0",
 		"portfinder": "^1.0.13",
 		"rimraf": "^2.6.2",
-		"semver": "^5.4.1",
-		"shelljs": "^0.7.8",
+		"semver": "^5.5.0",
+		"shelljs": "^0.8.1",
 		"stylelint": "^8.4.0",
 		"stylelint-config-standard": "^18.0.0",
 		"url-loader": "^0.6.2",
 		"vue": "^2.5.13",
-		"vue-loader": "^13.6.2",
+		"vue-loader": "^13.7.0",
 		"vue-style-loader": "^3.0.3",
 		"vue-template-compiler": "^2.5.13",
 		"webpack": "^3.10.0",
-		"webpack-bundle-analyzer": "^2.9.0",
-		"webpack-dev-middleware": "^2.0.3",
+		"webpack-bundle-analyzer": "^2.9.2",
+		"webpack-dev-middleware": "^2.0.4",
 		"webpack-hot-middleware": "^2.21.0",
 		"webpack-merge": "^4.1.1"
 	},
@@ -66,15 +66,9 @@
 		"node": ">= 6.0.0",
 		"npm": ">= 5.0.0"
 	},
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not ie < 11"
-	],
+	"browserslist": ["> 1%", "last 2 versions", "not ie < 11"],
 	"babel": {
-		"presets": [
-			"env"
-		]
+		"presets": ["env"]
 	},
 	"prettier": {
 		"useTabs": true,
@@ -99,19 +93,14 @@
 		"globals": {
 			"Vue": true
 		},
-		"extends": [
-			"eslint:recommended",
-			"plugin:vue/recommended"
-		],
+		"extends": ["eslint:recommended", "plugin:vue/recommended"],
 		"rules": {
 			"vue/html-indent": "tab",
 			"vue/max-attributes-per-line": 3,
 			"no-console": "warn"
 		}
 	},
-	"eslintIgnore": [
-		"node_modules/*.*"
-	],
+	"eslintIgnore": ["node_modules/*.*"],
 	"postcss": {
 		"plugins": {
 			"autoprefixer": {}

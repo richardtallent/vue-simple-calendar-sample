@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 2.0.1</h1>
+			<h1>vue-calendar-view 2.1.0</h1>
 
 			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
@@ -42,9 +42,9 @@
 		<calendar-view
 			class="holiday-us-traditional holiday-us-official"
 			:show-date="showDate"
-			@clickDay="onClickDay"
-			@clickEvent="onClickEvent"
-			@setShowDate="setShowDate"
+			@click-date="onClickDay"
+			@click-event="onClickEvent"
+			@show-date-change="setShowDate"
 			:time-format-options="{hour: 'numeric', minute:'2-digit'}"
 			:enable-drag-drop="true"
 			:disable-past="disablePast"
@@ -53,7 +53,7 @@
 			:display-period-uom="displayPeriodUom"
 			:display-period-count="displayPeriodCount"
 			:starting-day-of-week="startingDayOfWeek"
-			@dropEventOnDate="onDrop"
+			@drop-on-date="onDrop"
 			:events="events"/>
 
 	</div>

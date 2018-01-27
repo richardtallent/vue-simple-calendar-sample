@@ -28,3 +28,5 @@ npm run build
 | 2018.01.01 | 2.0.0   | Upgrade component to 2.0.0 |
 | 2018.01.23 | 2.0.1   | Upgrade component to 2.0.1 |
 | 2018.01.24 | 2.1.0   | Upgrade component to 2.1.0, adjust events listened for |
+| 2018.01.25 | 2.1.1   | Upgrade component to 2.1.1 |
+| 2018.01.27 | 2.1.3   | Upgrade component to 2.1.3 |

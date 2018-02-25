@@ -1,5 +1,3 @@
-require("./check-versions")()
-
 process.env.NODE_ENV = "production"
 
 var ora = require("ora")
@@ -27,7 +25,6 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 				chunkModules: false,
 			}) + "\n\n"
 		)
-
 		console.log(chalk.cyan("  Build complete.\n"))
 		console.log(
 			chalk.yellow(

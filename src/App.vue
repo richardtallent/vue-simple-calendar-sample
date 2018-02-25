@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 2.1.3</h1>
+			<h1>vue-calendar-view 2.1.4</h1>
 
 			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
@@ -60,14 +60,14 @@
 </template>
 
 <script>
-import CalendarView from "vue-simple-calendar"
-import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
-require("vue-simple-calendar/dist/static/css/default.css")
-require("vue-simple-calendar/dist/static/css/holidays-us.css")
+//import CalendarView from "vue-simple-calendar"
+//import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
+//require("vue-simple-calendar/dist/static/css/default.css")
+//require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
 // For live testing while making changes to the component
-//import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
-//import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
+import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
+import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 //require("../../vue-simple-calendar/static/css/default.css")
 //require("../../vue-simple-calendar/static/css/holidays-us.css")
 

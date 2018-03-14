@@ -12,7 +12,7 @@
 
 			<h3>{{ message }}</h3>
 
-			<button @click="clickTestAddEvent" :disabled="alreadyAdded">Add Event on 22nd-23rd</button>
+			<button :disabled="alreadyAdded" @click="clickTestAddEvent">Add Event on 22nd-23rd</button>
 
 			<p>Period UOM:
 					<select v-model="displayPeriodUom">
@@ -40,11 +40,8 @@
 		</div>
 		
 		<calendar-view
-			class="holiday-us-traditional holiday-us-official"
+			:events="events"
 			:show-date="showDate"
-			@click-date="onClickDay"
-			@click-event="onClickEvent"
-			@show-date-change="setShowDate"
 			:time-format-options="{hour: 'numeric', minute:'2-digit'}"
 			:enable-drag-drop="true"
 			:disable-past="disablePast"
@@ -53,8 +50,12 @@
 			:display-period-uom="displayPeriodUom"
 			:display-period-count="displayPeriodCount"
 			:starting-day-of-week="startingDayOfWeek"
+			class="holiday-us-traditional holiday-us-official"
 			@drop-on-date="onDrop"
-			:events="events"/>
+			@click-date="onClickDay"
+			@click-event="onClickEvent"
+			@show-date-change="setShowDate"
+			/>
 
 	</div>
 </template>
@@ -65,7 +66,7 @@
 //require("vue-simple-calendar/dist/static/css/default.css")
 //require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
-// For live testing while making changes to the component
+// For live testing while making changes to the component, assumes repo pulled to sister folder
 import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
 import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 //require("../../vue-simple-calendar/static/css/default.css")

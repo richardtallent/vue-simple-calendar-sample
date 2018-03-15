@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 2.1.4</h1>
+			<h1>vue-calendar-view 2.2.0</h1>
 
 			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
 				functionality is optional and controlled by the calling app).</p>
@@ -55,7 +55,7 @@
 			@click-date="onClickDay"
 			@click-event="onClickEvent"
 			@show-date-change="setShowDate"
-			/>
+		/>
 
 	</div>
 </template>
@@ -69,8 +69,8 @@
 // For live testing while making changes to the component, assumes repo pulled to sister folder
 import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
 import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
-//require("../../vue-simple-calendar/static/css/default.css")
-//require("../../vue-simple-calendar/static/css/holidays-us.css")
+require("../../vue-simple-calendar/static/css/default.css")
+require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",
@@ -233,7 +233,7 @@ body {
 }
 
 #app {
-	font-family: Calibri;
+	font-family: Calibri, sans-serif;
 	width: 90vw;
 	min-width: 30em;
 	max-width: 100em;
@@ -244,9 +244,11 @@ body {
 	max-height: 100vh;
 	flex-direction: column;
 }
+
 .app-description {
 	flex: 0 1 auto;
 }
+
 .calendar-view {
 	flex: 1 1 auto;
 	margin-bottom: 1em;
@@ -267,15 +269,16 @@ body {
 }
 
 /*
-	These styles are optional, added for the demo only, to illustrate the flexbility
-	of styling the calendar purely with CSS.
-	*/
+These styles are optional, added for the demo only, to illustrate the flexbility
+of styling the calendar purely with CSS.
+*/
 
 /* Add some emoji for Canada and France... */
 .calendar .d07-01 .date::before {
 	content: "\1F1E8\1F1E6";
 	margin-right: 0.5em;
 }
+
 .calendar .d07-14 .date::before {
 	content: "\1F1EB\1F1F7";
 	margin-right: 0.5em;
@@ -286,6 +289,7 @@ body {
 	background-color: #e0f0e0;
 	border-color: #d7e7d7;
 }
+
 .calendar .event.birthday::before {
 	content: "\1F382";
 	margin-right: 0.5em;

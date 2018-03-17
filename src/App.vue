@@ -4,41 +4,38 @@
 			<h1>vue-calendar-view 2.2.0</h1>
 
 			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
-				functionality is optional and controlled by the calling app).</p>
-
-			<p>Note that this demo page has some examples of custom styles -- the holiday icons. As you can see from the
-				source, it's easy to customize the style to meet your needs. I've purposefully tried to choose defaults
-				that are modern and clean without getting so complicated that they would be difficult to override.</p>
+			functionality is optional and controlled by the calling app). Note that this demo page has some examples
+			of custom styles -- the holiday icons. As you can see from the source, it's easy to customize the style
+			to meet your needs.</p>
 
 			<h3>{{ message }}</h3>
 
-			<button :disabled="alreadyAdded" @click="clickTestAddEvent">Add Event on 22nd-23rd</button>
-
-			<p>Period UOM:
-					<select v-model="displayPeriodUom">
-						<option>month</option>
-						<option>week</option>
-						<option>year</option>
-					</select>
-			</p>
-
-			<p>Period Count:
-					<select v-model="displayPeriodCount">
-						<option :value="1">1</option>
-						<option :value="2">2</option>
-						<option :value="3">3</option>
-					</select>
-			</p>
-
-			<p>Starting day of the week: <select v-model="startingDayOfWeek">
-				<option
-					v-for="(d, index) in dayNames"
-					:value="index"
-					:key="index">{{ d }}</option>
-			</select></p>
+			<div style="display:flex; flex-direction: row; justify-content: space-between;">
+				<button :disabled="alreadyAdded" @click="clickTestAddEvent">Add Event on 22nd-23rd</button>
+				<p>Period UOM:
+						<select v-model="displayPeriodUom">
+							<option>month</option>
+							<option>week</option>
+							<option>year</option>
+						</select>
+				</p>
+				<p>Period Count:
+						<select v-model="displayPeriodCount">
+							<option :value="1">1</option>
+							<option :value="2">2</option>
+							<option :value="3">3</option>
+						</select>
+				</p>
+				<p>Starting day of the week: <select v-model="startingDayOfWeek">
+					<option
+						v-for="(d, index) in dayNames"
+						:value="index"
+						:key="index">{{ d }}</option>
+				</select></p>
+			</div>
 
 		</div>
-		
+
 		<calendar-view
 			:events="events"
 			:show-date="showDate"
@@ -59,7 +56,6 @@
 
 	</div>
 </template>
-
 <script>
 //import CalendarView from "vue-simple-calendar"
 //import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"

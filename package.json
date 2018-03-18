@@ -11,7 +11,7 @@
 		"start": "node build/dev-server.js",
 		"build": "node build/build.js"
 	},
-	"notdependencies": {
+	"dependencies": {
 		"vue-simple-calendar": "^2.2.0"
 	},
 	"devDependencies": {

@@ -3,28 +3,26 @@
 		<div class="app-description">
 			<h1>vue-calendar-view 2.2.0</h1>
 
-			<p>Below is an example of vue-simple-calendar. You can drag and drop events to change the start date (this
-			functionality is optional and controlled by the calling app). Note that this demo page has some examples
-			of custom styles -- the holiday icons. As you can see from the source, it's easy to customize the style
-			to meet your needs.</p>
+			<p>Below is an example of vue-simple-calendar. This demo uses the optional "default" theme as well
+			as the optional "holiday icon" theme.</p>
 
 			<h3>{{ message }}</h3>
 
 			<div style="display:flex; flex-direction: row; justify-content: space-between;">
 				<button :disabled="alreadyAdded" @click="clickTestAddEvent">Add Event on 22nd-23rd</button>
 				<p>Period UOM:
-						<select v-model="displayPeriodUom">
-							<option>month</option>
-							<option>week</option>
-							<option>year</option>
-						</select>
+					<select v-model="displayPeriodUom">
+						<option>month</option>
+						<option>week</option>
+						<option>year</option>
+					</select>
 				</p>
 				<p>Period Count:
-						<select v-model="displayPeriodCount">
-							<option :value="1">1</option>
-							<option :value="2">2</option>
-							<option :value="3">3</option>
-						</select>
+					<select v-model="displayPeriodCount">
+						<option :value="1">1</option>
+						<option :value="2">2</option>
+						<option :value="3">3</option>
+					</select>
 				</p>
 				<p>Starting day of the week: <select v-model="startingDayOfWeek">
 					<option
@@ -33,7 +31,6 @@
 						:key="index">{{ d }}</option>
 				</select></p>
 			</div>
-
 		</div>
 
 		<calendar-view
@@ -57,16 +54,16 @@
 	</div>
 </template>
 <script>
-//import CalendarView from "vue-simple-calendar"
-//import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
-//require("vue-simple-calendar/dist/static/css/default.css")
-//require("vue-simple-calendar/dist/static/css/holidays-us.css")
+import CalendarView from "vue-simple-calendar"
+import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
+require("vue-simple-calendar/dist/static/css/default.css")
+require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
+/*import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
 import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")
+require("../../vue-simple-calendar/static/css/holidays-us.css")*/
 
 export default {
 	name: "App",
@@ -190,22 +187,17 @@ export default {
 		},
 		onDrop(event, date) {
 			this.message = `You dropped ${event.id} on ${date.toLocaleDateString()}`
-			// Before handling drag/drop date math, need to convert string dates to
-			// local dates and coalesce endDate to startDate.
-			const fixedStartDate = CalendarMathMixin.methods.toLocalDate(
-				event.startDate
-			)
-			const fixedEndDate = CalendarMathMixin.methods.toLocalDate(
-				event.endDate || fixedStartDate
-			)
 			// Determine the delta between the old start date and the date chosen,
 			// and apply that delta to both the start and end date to move the event.
-			const eLength = CalendarMathMixin.methods.dayDiff(fixedStartDate, date)
-			event.startDate = CalendarMathMixin.methods.addDays(
-				fixedStartDate,
+			const eLength = CalendarMathMixin.methods.dayDiff(event.startDate, date)
+			event.originalEvent.startDate = CalendarMathMixin.methods.addDays(
+				event.startDate,
 				eLength
 			)
-			event.endDate = CalendarMathMixin.methods.addDays(fixedEndDate, eLength)
+			event.originalEvent.endDate = CalendarMathMixin.methods.addDays(
+				event.endDate,
+				eLength
+			)
 		},
 		clickTestAddEvent() {
 			if (this.alreadyAdded) return

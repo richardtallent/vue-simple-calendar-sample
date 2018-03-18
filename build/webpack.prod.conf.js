@@ -1,10 +1,8 @@
-var path = require("path")
 var utils = require("./utils")
 var webpack = require("webpack")
 var config = require("../config")
 var merge = require("webpack-merge")
 var baseWebpackConfig = require("./webpack.base.conf")
-var CopyWebpackPlugin = require("copy-webpack-plugin")
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var env = config.build.env
@@ -12,8 +10,7 @@ var env = config.build.env
 var webpackConfig = merge(baseWebpackConfig, {
 	mode: "production",
 	module: {
-		rules: utils.styleLoaders({
-		}),
+		rules: utils.styleLoaders({}),
 	},
 	output: {
 		path: config.build.assetsRoot,
@@ -40,14 +37,6 @@ var webpackConfig = merge(baseWebpackConfig, {
 			// necessary to consistently work with multiple chunks via CommonsChunkPlugin
 			chunksSortMode: "dependency",
 		}),
-		// copy custom static assets
-		new CopyWebpackPlugin([
-			{
-				from: path.resolve(__dirname, "../static"),
-				to: config.build.assetsSubDirectory,
-				ignore: [".*"],
-			},
-		]),
 	],
 })
 

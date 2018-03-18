@@ -11,16 +11,12 @@
 		"start": "node build/dev-server.js",
 		"build": "node build/build.js"
 	},
-	"dependencies": {
-		"vue-simple-calendar": "^2.2.0"
-	},
 	"devDependencies": {
 		"ajv": "^6.2.1",
 		"autoprefixer": "^8.1.0",
 		"babel-core": "^6.26.0",
 		"babel-loader": "^7.1.4",
 		"babel-plugin-transform-runtime": "^6.23.0",
-		"babel-polyfill": "^6.26.0",
 		"babel-preset-env": "^1.6.1",
 		"babel-register": "^6.26.0",
 		"chalk": "^2.3.2",
@@ -118,5 +114,8 @@
 		"plugins": {
 			"autoprefixer": {}
 		}
+	},
+	"dependencies": {
+		"babel-polyfill": "^6.26.0"
 	}
 }

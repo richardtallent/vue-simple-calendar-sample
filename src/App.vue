@@ -54,16 +54,16 @@
 	</div>
 </template>
 <script>
-import CalendarView from "vue-simple-calendar"
+/*import CalendarView from "vue-simple-calendar"
 import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
-require("vue-simple-calendar/dist/static/css/holidays-us.css")
+require("vue-simple-calendar/dist/static/css/holidays-us.css")*/
 
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-/*import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
+import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
 import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")*/
+require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",

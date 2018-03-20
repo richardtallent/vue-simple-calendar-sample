@@ -21,13 +21,14 @@ npm run build
 
 ## Release History
 
-| Date       | Version | Notes                              |
-| ---------- | ------- | ---------------------------------- |
-| 2017.12.17 | 1.0.0   | Split from the main component repo (using 1.8.0) |
-| 2017.12.30 | 1.0.1   | Upgrade component to 1.8.2 |
-| 2018.01.01 | 2.0.0   | Upgrade component to 2.0.0 |
-| 2018.01.23 | 2.0.1   | Upgrade component to 2.0.1 |
-| 2018.01.24 | 2.1.0   | Upgrade component to 2.1.0, adjust events listened for |
-| 2018.01.25 | 2.1.1   | Upgrade component to 2.1.1 |
-| 2018.01.27 | 2.1.3   | Upgrade component to 2.1.3 |
-| 2018.03.18 | 2.2.0   | Upgrade component to 2.2.0 |
+| Date       | Version | Notes                                                           |
+| ---------- | ------- | --------------------------------------------------------------- |
+| 2017.12.17 | 1.0.0   | Split from the main component repo (using 1.8.0)                |
+| 2017.12.30 | 1.0.1   | Upgrade component to 1.8.2                                      |
+| 2018.01.01 | 2.0.0   | Upgrade component to 2.0.0                                      |
+| 2018.01.23 | 2.0.1   | Upgrade component to 2.0.1                                      |
+| 2018.01.24 | 2.1.0   | Upgrade component to 2.1.0, adjust events listened for          |
+| 2018.01.25 | 2.1.1   | Upgrade component to 2.1.1                                      |
+| 2018.01.27 | 2.1.3   | Upgrade component to 2.1.3                                      |
+| 2018.03.18 | 2.2.0   | Upgrade component to 2.2.0                                      |
+| 2018.03.19 | 2.2.1   | Upgrade component to 2.2.1, change how mixin is used, fix babel |

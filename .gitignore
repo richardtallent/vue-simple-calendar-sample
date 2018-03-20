@@ -5,3 +5,5 @@ npm-debug.log*
 package-lock.json
 debug.log
 .editorconfig
+CalendarView.vue
+CalendarMathMixin.js

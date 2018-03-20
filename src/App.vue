@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 2.2.0</h1>
+			<h1>vue-calendar-view 2.2.1</h1>
 
 			<p>Below is an example of vue-simple-calendar. This demo uses the optional "default" theme as well
 			as the optional "holiday icon" theme.</p>
@@ -59,18 +59,21 @@ import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
 require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
-// For live testing while making changes to the component, assumes repo pulled to sister folder
-/*import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
-import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
-require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")*/
+// For live testing while making changes to the component. Babel won't transpile
+// code outside the root path, so it is unfortunately necessary to copy these files
+// from the other repo during development, then copy them back.
+// https://github.com/babel/babel-loader/issues/293
+// import CalendarView from "./CalendarView.vue"
+// import CalendarMathMixin from "./CalendarMathMixin"
+// require("../../vue-simple-calendar/static/css/default.css")
+// require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",
 	components: {
 		CalendarView,
-		CalendarMathMixin,
 	},
+	mixins: [CalendarMathMixin],
 	data() {
 		return {
 			/* Show the current month, and give it some fake events to show */
@@ -160,14 +163,10 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			return CalendarMathMixin.methods.getDefaultBrowserLocale
+			return this.getDefaultBrowserLocale
 		},
 		dayNames() {
-			return CalendarMathMixin.methods.getFormattedWeekdayNames(
-				this.userLocale,
-				"long",
-				0
-			)
+			return this.getFormattedWeekdayNames(this.userLocale, "long", 0)
 		},
 	},
 	methods: {
@@ -189,15 +188,9 @@ export default {
 			this.message = `You dropped ${event.id} on ${date.toLocaleDateString()}`
 			// Determine the delta between the old start date and the date chosen,
 			// and apply that delta to both the start and end date to move the event.
-			const eLength = CalendarMathMixin.methods.dayDiff(event.startDate, date)
-			event.originalEvent.startDate = CalendarMathMixin.methods.addDays(
-				event.startDate,
-				eLength
-			)
-			event.originalEvent.endDate = CalendarMathMixin.methods.addDays(
-				event.endDate,
-				eLength
-			)
+			const eLength = this.dayDiff(event.startDate, date)
+			event.originalEvent.startDate = this.addDays(event.startDate, eLength)
+			event.originalEvent.endDate = this.addDays(event.endDate, eLength)
 		},
 		clickTestAddEvent() {
 			if (this.alreadyAdded) return

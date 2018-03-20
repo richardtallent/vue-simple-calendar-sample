@@ -64,16 +64,7 @@
 		"node": ">= 6.0.0",
 		"npm": ">= 5.0.0"
 	},
-	"browserslist": [
-		"> 1%",
-		"last 2 versions",
-		"not ie < 11"
-	],
-	"babel": {
-		"presets": [
-			"env"
-		]
-	},
+	"browserslist": ["> 1%", "last 2 versions", "ie >= 11"],
 	"prettier": {
 		"useTabs": true,
 		"semi": false,
@@ -97,19 +88,14 @@
 		"globals": {
 			"Vue": true
 		},
-		"extends": [
-			"eslint:recommended",
-			"plugin:vue/recommended"
-		],
+		"extends": ["eslint:recommended", "plugin:vue/recommended"],
 		"rules": {
 			"vue/html-indent": "tab",
 			"vue/max-attributes-per-line": 3,
 			"no-console": "warn"
 		}
 	},
-	"eslintIgnore": [
-		"node_modules/*.*"
-	],
+	"eslintIgnore": ["node_modules/*.*"],
 	"postcss": {
 		"plugins": {
 			"autoprefixer": {}
@@ -117,6 +103,6 @@
 	},
 	"dependencies": {
 		"babel-polyfill": "^6.26.0",
-		"vue-simple-calendar": "^2.2.0"
+		"view-simple-calendar": "2.2.1"
 	}
 }

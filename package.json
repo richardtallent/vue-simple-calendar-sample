@@ -103,6 +103,6 @@
 	},
 	"dependencies": {
 		"babel-polyfill": "^6.26.0",
-		"view-simple-calendar": "2.2.1"
+		"vue-simple-calendar": "2.2.1"
 	}
 }

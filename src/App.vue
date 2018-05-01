@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="app-description">
-			<h1>vue-calendar-view 2.2.0</h1>
+			<h1>vue-calendar-view 3.0.0</h1>
 
 			<p>Below is an example of vue-simple-calendar. This demo uses the optional "default" theme as well
 			as the optional "holiday icon" theme.</p>
@@ -44,6 +44,7 @@
 			:display-period-uom="displayPeriodUom"
 			:display-period-count="displayPeriodCount"
 			:starting-day-of-week="startingDayOfWeek"
+			:date-classes="{'2018-04-05': 'foo'}"
 			class="holiday-us-traditional holiday-us-official"
 			@drop-on-date="onDrop"
 			@click-date="onClickDay"
@@ -54,16 +55,17 @@
 	</div>
 </template>
 <script>
+/*
 import CalendarView from "vue-simple-calendar"
 import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
 require("vue-simple-calendar/dist/static/css/default.css")
 require("vue-simple-calendar/dist/static/css/holidays-us.css")
-
+*/
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-/*import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
+import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
 import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
 require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")*/
+require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",
@@ -229,7 +231,6 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
-	max-height: 100vh;
 	flex-direction: column;
 }
 
@@ -237,22 +238,27 @@ body {
 	flex: 0 1 auto;
 }
 
-.calendar-view {
+.cv-wrapper {
 	flex: 1 1 auto;
 	margin-bottom: 1em;
 }
 
-.calendar-view.period-week,
-.calendar-view.period-month.periodCount-1 {
+.cv-wrapper.period-week,
+.cv-wrapper.period-month.periodCount-1 {
 	height: 60vw;
 }
 
-.calendar-view.period-month.periodCount-2,
-.calendar-view.period-month.periodCount-3 {
+.cv-wrapper.period-month.periodCount-2 {
+	height: 60vw;
+	max-height: 80vh;
+}
+
+.cv-wrapper.period-month.periodCount-2,
+.cv-wrapper.period-month.periodCount-3 {
 	height: 150vw;
 }
 
-.calendar-view.period-year {
+.cv-wrapper.period-year {
 	height: 500vw;
 }
 

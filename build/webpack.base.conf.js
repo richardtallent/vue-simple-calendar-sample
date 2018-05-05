@@ -1,6 +1,6 @@
 var path = require("path")
 var config = require("../config")
-var vueLoaderConfig = require("./vue-loader.conf")
+const { VueLoaderPlugin } = require('vue-loader')
 
 function resolve(dir) {
 	return path.join(__dirname, "..", dir)
@@ -28,24 +28,22 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(js|vue)$/,
-				loader: "eslint-loader",
-				enforce: "pre",
-				include: [resolve("src"), resolve("test")],
-				options: {
-					formatter: require("eslint-friendly-formatter"),
-				},
-			},
-			{
 				test: /\.vue$/,
-				loader: "vue-loader",
-				options: vueLoaderConfig,
+				loader: 'vue-loader',
 			},
 			{
 				test: /\.js$/,
-				loader: "babel-loader",
-				include: [resolve("src"), resolve("test")],
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+			},
+			{
+				test: /\.css$/,
+				use: ["vue-style-loader", "css-loader", "postcss-loader"],
 			},
 		],
+
 	},
+	plugins: [
+		new VueLoaderPlugin(),
+	],
 }

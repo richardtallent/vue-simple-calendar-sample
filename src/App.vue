@@ -71,8 +71,8 @@ export default {
 	name: "App",
 	components: {
 		CalendarView,
-		CalendarMathMixin,
 	},
+	mixins: [CalendarMathMixin],
 	data() {
 		return {
 			/* Show the current month, and give it some fake events to show */
@@ -162,14 +162,10 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			return CalendarMathMixin.methods.getDefaultBrowserLocale
+			return this.getDefaultBrowserLocale
 		},
 		dayNames() {
-			return CalendarMathMixin.methods.getFormattedWeekdayNames(
-				this.userLocale,
-				"long",
-				0
-			)
+			return this.getFormattedWeekdayNames(this.userLocale, "long", 0)
 		},
 	},
 	methods: {
@@ -191,15 +187,9 @@ export default {
 			this.message = `You dropped ${event.id} on ${date.toLocaleDateString()}`
 			// Determine the delta between the old start date and the date chosen,
 			// and apply that delta to both the start and end date to move the event.
-			const eLength = CalendarMathMixin.methods.dayDiff(event.startDate, date)
-			event.originalEvent.startDate = CalendarMathMixin.methods.addDays(
-				event.startDate,
-				eLength
-			)
-			event.originalEvent.endDate = CalendarMathMixin.methods.addDays(
-				event.endDate,
-				eLength
-			)
+			const eLength = this.dayDiff(event.startDate, date)
+			event.originalEvent.startDate = this.addDays(event.startDate, eLength)
+			event.originalEvent.endDate = this.addDays(event.endDate, eLength)
 		},
 		clickTestAddEvent() {
 			if (this.alreadyAdded) return

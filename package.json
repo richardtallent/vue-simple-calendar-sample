@@ -116,6 +116,6 @@
 		}
 	},
 	"dependencies": {
-		"vue-simple-calendar": "^2.2.0"
+		"vue-simple-calendar": "^3.0.0"
 	}
 }

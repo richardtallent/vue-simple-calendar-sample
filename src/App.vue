@@ -1,57 +1,114 @@
 <template>
 	<div id="app">
-		<div class="app-description">
-			<h1>vue-calendar-view 3.0.0</h1>
 
-			<p>Below is an example of vue-simple-calendar. This demo uses the optional "default" theme as well
-			as the optional "holiday icon" theme.</p>
+		<div class="calendar-controls">
 
-			<h3>{{ message }}</h3>
+			<div v-if="message" class="notification is-success">{{ message }}</div>
 
-			<div style="display:flex; flex-direction: row; justify-content: space-between;">
-				<button :disabled="alreadyAdded" @click="clickTestAddEvent">Add Event on 22nd-23rd</button>
-				<p>Period UOM:
-					<select v-model="displayPeriodUom">
-						<option>month</option>
-						<option>week</option>
-						<option>year</option>
-					</select>
-				</p>
-				<p>Period Count:
-					<select v-model="displayPeriodCount">
-						<option :value="1">1</option>
-						<option :value="2">2</option>
-						<option :value="3">3</option>
-					</select>
-				</p>
-				<p>Starting day of the week: <select v-model="startingDayOfWeek">
-					<option
-						v-for="(d, index) in dayNames"
-						:value="index"
-						:key="index">{{ d }}</option>
-				</select></p>
+			<div class="box">
+
+				<h4 class="title is-5">Play with the options!</h4>
+
+				<div class="field">
+					<label class="label">Period UOM</label>
+					<div class="control">
+						<div class="select">
+							<select v-model="displayPeriodUom">
+								<option>month</option>
+								<option>week</option>
+								<option>year</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Period Count</label>
+					<div class="control">
+						<div class="select">
+							<select v-model="displayPeriodCount">
+								<option :value="1">1</option>
+								<option :value="2">2</option>
+								<option :value="3">3</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Starting day of the week</label>
+					<div class="control">
+						<div class="select">
+							<select v-model="startingDayOfWeek">
+								<option
+									v-for="(d, index) in dayNames"
+									:value="index"
+									:key="index">{{ d }}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Themes</label>
+					<label class="checkbox">Default</label>
+					<input v-model="useDefaultTheme" type="checkbox">
+				</div>
+
+				<div class="field">
+					<label class="checkbox">Holidays</label>
+					<input v-model="useHolidayTheme" type="checkbox">
+				</div>
 			</div>
+
+			<div class="box">
+				<h4 class="title is-5">Add an event!</h4>
+
+				<div class="field">
+					<label class="label">Title</label>
+					<div class="control">
+						<input v-model="newEventTitle" class="input" type="text">
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Start date</label>
+					<div class="control">
+						<input v-model="newEventStartDate" class="input" type="date">
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">End date</label>
+					<div class="control">
+						<input v-model="newEventEndDate" class="input" type="date">
+					</div>
+				</div>
+
+				<button class="button is-info" @click="clickTestAddEvent">Add</button>
+			</div>
+
 		</div>
-
-		<calendar-view
-			:events="events"
-			:show-date="showDate"
-			:time-format-options="{hour: 'numeric', minute:'2-digit'}"
-			:enable-drag-drop="true"
-			:disable-past="disablePast"
-			:disable-future="disableFuture"
-			:show-event-times="showEventTimes"
-			:display-period-uom="displayPeriodUom"
-			:display-period-count="displayPeriodCount"
-			:starting-day-of-week="startingDayOfWeek"
-			:date-classes="{'2018-04-05': 'foo'}"
-			class="holiday-us-traditional holiday-us-official"
-			@drop-on-date="onDrop"
-			@click-date="onClickDay"
-			@click-event="onClickEvent"
-			@show-date-change="setShowDate"
-		/>
-
+		<div class="calendar-parent">
+			<calendar-view
+				:events="events"
+				:show-date="showDate"
+				:time-format-options="{hour: 'numeric', minute:'2-digit'}"
+				:enable-drag-drop="true"
+				:disable-past="disablePast"
+				:disable-future="disableFuture"
+				:show-event-times="showEventTimes"
+				:display-period-uom="displayPeriodUom"
+				:display-period-count="displayPeriodCount"
+				:starting-day-of-week="startingDayOfWeek"
+				:date-classes="{'2018-04-05': 'foo'}"
+				:class="themeClasses"
+				@drop-on-date="onDrop"
+				@click-date="onClickDay"
+				@click-event="onClickEvent"
+				@show-date-change="setShowDate"
+			/>
+		</div>
 	</div>
 </template>
 <script>
@@ -77,14 +134,18 @@ export default {
 		return {
 			/* Show the current month, and give it some fake events to show */
 			showDate: this.thisMonth(1),
-			message: "Click a date or event...",
-			alreadyAdded: false,
+			message: "",
 			startingDayOfWeek: 0,
 			disablePast: false,
 			disableFuture: false,
 			displayPeriodUom: "month",
 			displayPeriodCount: 1,
 			showEventTimes: true,
+			newEventTitle: "",
+			newEventStartDate: "",
+			newEventEndDate: "",
+			useDefaultTheme: true,
+			useHolidayTheme: true,
 			events: [
 				{
 					id: "e0",
@@ -167,6 +228,17 @@ export default {
 		dayNames() {
 			return this.getFormattedWeekdayNames(this.userLocale, "long", 0)
 		},
+		themeClasses() {
+			return {
+				"theme-default": this.useDefaultTheme,
+				"holiday-us-traditional": this.useHolidayTheme,
+				"holiday-us-official": this.useHolidayTheme,
+			}
+		},
+	},
+	mounted() {
+		this.newEventStartDate = this.isoYearMonthDay(this.today())
+		this.newEventEndDate = this.isoYearMonthDay(this.today())
 	},
 	methods: {
 		thisMonth(d, h, m) {
@@ -192,14 +264,12 @@ export default {
 			event.originalEvent.endDate = this.addDays(event.endDate, eLength)
 		},
 		clickTestAddEvent() {
-			if (this.alreadyAdded) return
-			this.alreadyAdded = true
 			this.events.push({
-				id: "e12",
-				startDate: this.thisMonth(22),
-				endDate: this.thisMonth(23),
-				title: "New Event",
+				startDate: this.newEventStartDate,
+				endDate: this.newEventEndDate,
+				title: this.newEventTitle,
 			})
+			this.message = "You added an event!"
 		},
 	},
 }
@@ -210,63 +280,43 @@ html,
 body {
 	height: 100%;
 	margin: 0;
+	background-color: #f7fcff;
 }
 
 #app {
+	display: flex;
+	flex-direction: row;
 	font-family: Calibri, sans-serif;
-	width: 90vw;
-	min-width: 30em;
-	max-width: 100em;
-	min-height: 40em;
+	width: 95vw;
+	min-width: 30rem;
+	max-width: 100rem;
+	min-height: 40rem;
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
-	flex-direction: column;
 }
 
-.app-description {
-	flex: 0 1 auto;
+.calendar-controls {
+	margin-right: 1rem;
+	min-width: 14rem;
+	max-width: 14rem;
 }
 
-.cv-wrapper {
-	flex: 1 1 auto;
-	margin-bottom: 1em;
-}
-
-.cv-wrapper.period-week,
-.cv-wrapper.period-month.periodCount-1 {
-	height: 60vw;
-}
-
-.cv-wrapper.period-month.periodCount-2 {
-	height: 60vw;
+.calendar-parent {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	flex-grow: 1;
 	max-height: 80vh;
+	background-color: white;
 }
 
-.cv-wrapper.period-month.periodCount-2,
-.cv-wrapper.period-month.periodCount-3 {
-	height: 150vw;
+/* For long calendars, ensure each week gets sufficient height. The body of the calendar will scroll if needed */
+.cv-wrapper.period-month.periodCount-2 .cv-week,
+.cv-wrapper.period-month.periodCount-3 .cv-week,
+.cv-wrapper.period-year .cv-week {
+	min-height: 6rem;
 }
 
-.cv-wrapper.period-year {
-	height: 500vw;
-}
-
-/*
-These styles are optional, added for the demo only, to illustrate the flexbility
-of styling the calendar purely with CSS.
-*/
-
-/* Add some emoji for Canada and France... */
-.calendar .d07-01 .date::before {
-	content: "\1F1E8\1F1E6";
-	margin-right: 0.5em;
-}
-
-.calendar .d07-14 .date::before {
-	content: "\1F1EB\1F1F7";
-	margin-right: 0.5em;
-}
+/* These styles are optional, to illustrate the flexbility of styling the calendar purely with CSS. */
 
 /* Add some styling for events tagged with the "birthday" class */
 .calendar .event.birthday {

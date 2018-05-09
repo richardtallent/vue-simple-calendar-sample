@@ -121,7 +121,6 @@ import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.j
 require("../../vue-simple-calendar/static/css/default.css")
 require("../../vue-simple-calendar/static/css/holidays-us.css")
 */
-
 export default {
 	name: "App",
 	components: {
@@ -150,36 +149,36 @@ export default {
 					startDate: "2018-01-05",
 				},
 				{
-					id: "e99",
+					id: "e1",
 					startDate: this.thisMonth(15, 18, 30),
 				},
 				{
-					id: "e1",
+					id: "e2",
 					startDate: this.thisMonth(15),
 					title: "Single-day event with a long title",
 				},
 				{
-					id: "e2",
+					id: "e3",
 					startDate: this.thisMonth(7, 9, 25),
 					endDate: this.thisMonth(10, 16, 30),
 					title: "Multi-day event with a long title and times",
 				},
 				{
-					id: "e3",
+					id: "e4",
 					startDate: this.thisMonth(20),
 					title: "My Birthday!",
 					classes: "birthday",
 					url: "https://en.wikipedia.org/wiki/Birthday",
 				},
 				{
-					id: "e4",
+					id: "e5",
 					startDate: this.thisMonth(5),
 					endDate: this.thisMonth(12),
 					title: "Multi-day event",
 					classes: "purple",
 				},
 				{
-					id: "e5",
+					id: "foo",
 					startDate: this.thisMonth(29),
 					title: "Same day 1",
 				},

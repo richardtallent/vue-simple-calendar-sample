@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Sample app showing off the vue-simple-calendar component",
 	"author": "richardtallent <richard@tallent.us>",
 	"license": "MIT",
@@ -116,6 +116,6 @@
 		}
 	},
 	"dependencies": {
-		"vue-simple-calendar": "^3.0.0"
+		"vue-simple-calendar": "^3.0.1"
 	}
 }

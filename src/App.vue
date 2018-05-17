@@ -99,7 +99,6 @@
 				:display-period-uom="displayPeriodUom"
 				:display-period-count="displayPeriodCount"
 				:starting-day-of-week="startingDayOfWeek"
-				:date-classes="{'2018-04-05': 'foo'}"
 				:class="themeClasses"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
@@ -121,6 +120,7 @@ import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.j
 require("../../vue-simple-calendar/static/css/default.css")
 require("../../vue-simple-calendar/static/css/holidays-us.css")
 */
+
 export default {
 	name: "App",
 	components: {
@@ -299,9 +299,11 @@ body {
 }
 
 .calendar-parent {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	flex-grow: 1;
 	max-height: 80vh;
 	background-color: white;
 }

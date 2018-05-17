@@ -32,3 +32,4 @@ npm run build
 | 2018.01.27 | 2.1.3   | Upgrade component to 2.1.3                                      |
 | 2018.03.18 | 2.2.0   | Upgrade component to 2.2.0                                      |
 | 2018.03.19 | 2.2.1   | Upgrade component to 2.2.1, change how mixin is used, fix babel |
+| 2018.05.16 | 3.0.2   | Upgrade component to 3.0.2                                      |

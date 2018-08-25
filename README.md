@@ -33,3 +33,4 @@ npm run build
 | 2018.03.18 | 2.2.0   | Upgrade component to 2.2.0                                      |
 | 2018.03.19 | 2.2.1   | Upgrade component to 2.2.1, change how mixin is used, fix babel |
 | 2018.05.16 | 3.0.2   | Upgrade component to 3.0.2                                      |
+| 2018.08.25 | 4.0.0   | Upgrade component to 4.0.0, migrate to vue-cli 3                |

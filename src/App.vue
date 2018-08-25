@@ -100,31 +100,36 @@
 				:display-period-count="displayPeriodCount"
 				:starting-day-of-week="startingDayOfWeek"
 				:class="themeClasses"
+				:on-period-change="periodChanged"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
 				@click-event="onClickEvent"
-				@show-date-change="setShowDate"
-			/>
+			>
+				<calendar-view-header slot="header" slot-scope="{ headerProps }" :header-props="headerProps" @input="setShowDate" />
+			</calendar-view>
 		</div>
 	</div>
 </template>
 <script>
-import CalendarView from "vue-simple-calendar"
-import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
-require("vue-simple-calendar/dist/static/css/default.css")
-require("vue-simple-calendar/dist/static/css/holidays-us.css")
+// For testing against the published version
+//import CalendarView from "vue-simple-calendar"
+//import CalendarViewHeader from "vue-simple-calendar"
+//import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
+//require("vue-simple-calendar/dist/static/css/default.css")
+//require("vue-simple-calendar/dist/static/css/holidays-us.css")
+
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-/*
-import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue"
-import CalendarMathMixin from "../../vue-simple-calendar/src/CalendarMathMixin.js"
+import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
+import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
+import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
 require("../../vue-simple-calendar/static/css/default.css")
 require("../../vue-simple-calendar/static/css/holidays-us.css")
-*/
 
 export default {
 	name: "App",
 	components: {
 		CalendarView,
+		CalendarViewHeader,
 	},
 	mixins: [CalendarMathMixin],
 	data() {
@@ -237,7 +242,11 @@ export default {
 		this.newEventStartDate = this.isoYearMonthDay(this.today())
 		this.newEventEndDate = this.isoYearMonthDay(this.today())
 	},
+
 	methods: {
+		periodChanged(range) {
+			console.log(range)
+		},
 		thisMonth(d, h, m) {
 			const t = new Date()
 			return new Date(t.getFullYear(), t.getMonth(), d, h || 0, m || 0)

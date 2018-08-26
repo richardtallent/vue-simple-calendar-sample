@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"private": false,
 	"author": "richardtallent <richard@tallent.us>",
 	"description": "Sample app showing off the vue-simple-calendar component",

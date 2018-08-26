@@ -122,9 +122,8 @@ import {
 	CalendarViewHeader,
 	CalendarMathMixin,
 } from "vue-simple-calendar"
-//import CalendarMathMixin from "vue-simple-calendar"
-//require("vue-simple-calendar/dist/static/css/default.css")
-//require("vue-simple-calendar/dist/static/css/holidays-us.css")
+require("vue-simple-calendar/static/css/default.css")
+require("vue-simple-calendar/static/css/holidays-us.css")
 
 // For live testing while making changes to the component, assumes repo pulled to sister folder
 //import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
@@ -253,6 +252,8 @@ export default {
 
 	methods: {
 		periodChanged(range) {
+			// Demo does nothing with this information, just including the method to demonstrate how
+			// you can listen for changes to the displayed range and react to them (by loading events, etc.)
 			console.log(range)
 		},
 		thisMonth(d, h, m) {

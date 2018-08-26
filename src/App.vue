@@ -117,17 +117,21 @@
 <script>
 // For testing against the published version
 //import CalendarView from "vue-simple-calendar"
-//import CalendarViewHeader from "vue-simple-calendar"
-//import CalendarMathMixin from "vue-simple-calendar/dist/calendar-math-mixin.js"
+import {
+	CalendarView,
+	CalendarViewHeader,
+	CalendarMathMixin,
+} from "vue-simple-calendar"
+//import CalendarMathMixin from "vue-simple-calendar"
 //require("vue-simple-calendar/dist/static/css/default.css")
 //require("vue-simple-calendar/dist/static/css/holidays-us.css")
 
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
-import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
-import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
-require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")
+//import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
+//import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
+//import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
+//require("../../vue-simple-calendar/static/css/default.css")
+//require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 export default {
 	name: "App",

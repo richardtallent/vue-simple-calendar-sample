@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"vue": "^2.5.17",
-		"vue-simple-calendar": "^3.0.2"
+		"vue-simple-calendar": "^4.0.0"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "^3.0.1",

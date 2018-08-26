@@ -51,13 +51,17 @@
 
 				<div class="field">
 					<label class="label">Themes</label>
-					<label class="checkbox">Default</label>
-					<input v-model="useDefaultTheme" type="checkbox">
+					<label class="checkbox">
+						<input v-model="useDefaultTheme" type="checkbox">
+						Default
+					</label>
 				</div>
 
 				<div class="field">
-					<label class="checkbox">Holidays</label>
-					<input v-model="useHolidayTheme" type="checkbox">
+					<label class="checkbox">
+						<input v-model="useHolidayTheme" type="checkbox">
+						Holidays
+					</label>
 				</div>
 			</div>
 

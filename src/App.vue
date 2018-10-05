@@ -104,7 +104,7 @@
 				:display-period-count="displayPeriodCount"
 				:starting-day-of-week="startingDayOfWeek"
 				:class="themeClasses"
-				:on-period-change="periodChanged"
+				:period-changed-callback="periodChanged"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
 				@click-event="onClickEvent"
@@ -116,7 +116,6 @@
 </template>
 <script>
 // For testing against the published version
-//import CalendarView from "vue-simple-calendar"
 import {
 	CalendarView,
 	CalendarViewHeader,
@@ -126,11 +125,13 @@ require("vue-simple-calendar/static/css/default.css")
 require("vue-simple-calendar/static/css/holidays-us.css")
 
 // For live testing while making changes to the component, assumes repo pulled to sister folder
-//import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
-//import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
-//import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
-//require("../../vue-simple-calendar/static/css/default.css")
-//require("../../vue-simple-calendar/static/css/holidays-us.css")
+/*
+import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
+import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
+import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
+require("../../vue-simple-calendar/static/css/default.css")
+require("../../vue-simple-calendar/static/css/holidays-us.css")
+*/
 
 export default {
 	name: "App",
@@ -251,9 +252,10 @@ export default {
 	},
 
 	methods: {
-		periodChanged(range) {
+		periodChanged(range, eventSource) {
 			// Demo does nothing with this information, just including the method to demonstrate how
 			// you can listen for changes to the displayed range and react to them (by loading events, etc.)
+			console.log(eventSource)
 			console.log(range)
 		},
 		thisMonth(d, h, m) {

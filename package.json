@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "4.0.2",
+	"version": "4.1.0",
 	"private": false,
 	"author": "richardtallent <richard@tallent.us>",
 	"description": "Sample app showing off the vue-simple-calendar component",
@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"vue": "^2.5.17",
-		"vue-simple-calendar": "^4.0.2"
+		"vue-simple-calendar": "^4.1.0"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "^3.0.1",

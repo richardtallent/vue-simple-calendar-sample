@@ -338,13 +338,13 @@ body {
 /* These styles are optional, to illustrate the flexbility of styling the calendar purely with CSS. */
 
 /* Add some styling for events tagged with the "birthday" class */
-.calendar .event.birthday {
+.theme-default .cv-event.birthday {
 	background-color: #e0f0e0;
 	border-color: #d7e7d7;
 }
 
-.calendar .event.birthday::before {
-	content: "\1F382";
+.theme-default .cv-event.birthday::before {
+	content: "\1F382"; /* Birthday cake */
 	margin-right: 0.5em;
 }
 </style>

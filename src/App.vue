@@ -1,12 +1,9 @@
 <template>
 	<div id="app">
-
 		<div class="calendar-controls">
-
 			<div v-if="message" class="notification is-success">{{ message }}</div>
 
 			<div class="box">
-
 				<h4 class="title is-5">Play with the options!</h4>
 
 				<div class="field">
@@ -40,13 +37,18 @@
 					<div class="control">
 						<div class="select">
 							<select v-model="startingDayOfWeek">
-								<option
-									v-for="(d, index) in dayNames"
-									:value="index"
-									:key="index">{{ d }}</option>
+								<option v-for="(d, index) in dayNames" :value="index" :key="index">{{ d }}</option>
 							</select>
 						</div>
 					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Today Button</label>
+					<label class="checkbox">
+						<input v-model="useTodayIcons" type="checkbox">
+						Icons
+					</label>
 				</div>
 
 				<div class="field">
@@ -89,7 +91,6 @@
 
 				<button class="button is-info" @click="clickTestAddEvent">Add Event</button>
 			</div>
-
 		</div>
 		<div class="calendar-parent">
 			<calendar-view
@@ -105,33 +106,36 @@
 				:starting-day-of-week="startingDayOfWeek"
 				:class="themeClasses"
 				:period-changed-callback="periodChanged"
+				:current-period-label="useTodayIcons ? 'icons' : ''"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
 				@click-event="onClickEvent"
 			>
-				<calendar-view-header slot="header" slot-scope="{ headerProps }" :header-props="headerProps" @input="setShowDate" />
+				<calendar-view-header
+					slot="header"
+					slot-scope="{ headerProps }"
+					:header-props="headerProps"
+					@input="setShowDate"
+				/>
 			</calendar-view>
 		</div>
 	</div>
 </template>
 <script>
-// For testing against the published version
+// Load CSS from the published version
+//require("vue-simple-calendar/static/css/default.css")
+//require("vue-simple-calendar/static/css/holidays-us.css")
+
+// Load CSS from the local repo
+require("../../vue-simple-calendar/static/css/default.css")
+require("../../vue-simple-calendar/static/css/holidays-us.css")
+
 import {
 	CalendarView,
 	CalendarViewHeader,
 	CalendarMathMixin,
-} from "vue-simple-calendar"
-require("vue-simple-calendar/static/css/default.css")
-require("vue-simple-calendar/static/css/holidays-us.css")
-
-// For live testing while making changes to the component, assumes repo pulled to sister folder
-/*
-import CalendarView from "../../vue-simple-calendar/src/components/CalendarView.vue"
-import CalendarViewHeader from "../../vue-simple-calendar/src/components/CalendarViewHeader.vue"
-import CalendarMathMixin from "../../vue-simple-calendar/src/components/CalendarMathMixin.js"
-require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")
-*/
+	// } from "vue-simple-calendar"	// published version
+} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
 
 export default {
 	name: "App",
@@ -156,6 +160,7 @@ export default {
 			newEventEndDate: "",
 			useDefaultTheme: true,
 			useHolidayTheme: true,
+			useTodayIcons: false,
 			events: [
 				{
 					id: "e0",
@@ -285,6 +290,11 @@ export default {
 				startDate: this.newEventStartDate,
 				endDate: this.newEventEndDate,
 				title: this.newEventTitle,
+				id:
+					"e" +
+					Math.random()
+						.toString(36)
+						.substr(2, 10),
 			})
 			this.message = "You added an event!"
 		},

@@ -36,3 +36,4 @@ npm run build
 | 2018.08.25 | 4.0.2   | Upgrade component to 4.0.2, migrate to vue-cli 3                |
 | 2018.10.05 | 4.1.0   | Upgrade component to 4.1.0						                 |
 | 2018.12.18 | 4.2.0   | Upgrade component to 4.2.0, auto-gen id (fixes #104)            |
+| 2019.01.25 | 4.2.1   | Upgrade component to 4.2.1, update other dependencies           |

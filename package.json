@@ -1,49 +1,38 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "4.2.2",
+	"version": "4.3.2",
 	"private": false,
-	"author": "richardtallent <richard@tallent.us>",
 	"description": "Sample app showing off the vue-simple-calendar component",
-	"license": "MIT",
-	"repository": "https://github.com/richardtallent/vue-simple-calendar-sample",
+	"author": "richardtallent <richard@tallent.us>",
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {
+		"babel-eslint": "^10.0.3",
+		"core-js": "^3.3.2",
 		"vue": "^2.6.10",
-		"vue-simple-calendar": "^4.2.2"
+		"vue-simple-calendar": "^4.3.2"
 	},
 	"devDependencies": {
-		"@vue/cli-plugin-babel": "^3.3.0",
-		"@vue/cli-plugin-eslint": "^3.3.0",
-		"@vue/cli-service": "^3.3.1",
-		"@vue/eslint-config-prettier": "^4.0.1",
-		"node-sass": "^4.12.0",
-		"sass-loader": "^7.0.1",
+		"@vue/cli-plugin-babel": "^4.0.5",
+		"@vue/cli-plugin-eslint": "^4.0.5",
+		"@vue/cli-service": "^4.0.5",
+		"@vue/eslint-config-prettier": "^5.1.0",
+		"babel-eslint": "^10.0.3",
+		"eslint": "^5.16.0",
+		"eslint-config-tabsanity": "^1.0.22",
+		"eslint-plugin-prettier": "^3.1.1",
+		"eslint-plugin-vue": "^5.0.0",
+		"node-sass": "^4.13.0",
+		"sass-loader": "^7.3.1",
 		"vue-template-compiler": "^2.6.10"
 	},
 	"eslintConfig": {
-		"root": true,
-		"env": {
-			"node": true
-		},
 		"extends": [
-			"plugin:vue/recommended",
-			"@vue/prettier"
-		],
-		"rules": {
-			"vue/html-indent": [
-				"warn",
-				"tab"
-			],
-			"no-console": "warn",
-			"vue/max-attributes-per-line": "off"
-		},
-		"parserOptions": {
-			"parser": "babel-eslint"
-		}
+			"tabsanity"
+		]
 	},
 	"prettier": {
 		"useTabs": true,
@@ -51,12 +40,6 @@
 		"singleQuote": false,
 		"bracketSpacing": true,
 		"trailingComma": "es5"
-	},
-	"stylelint": {
-		"extends": "stylelint-config-standard",
-		"rules": {
-			"indentation": "tab"
-		}
 	},
 	"postcss": {
 		"plugins": {
@@ -66,5 +49,13 @@
 	"browserslist": [
 		"> 1%",
 		"ie >= 11"
-	]
+	],
+	"license": "MIT",
+	"repository": "https://github.com/richardtallent/vue-simple-calendar-sample",
+	"stylelint": {
+		"extends": "stylelint-config-standard",
+		"rules": {
+			"indentation": "tab"
+		}
+	}
 }

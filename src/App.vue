@@ -37,7 +37,13 @@
 					<div class="control">
 						<div class="select">
 							<select v-model="startingDayOfWeek">
-								<option v-for="(d, index) in dayNames" :value="index" :key="index">{{ d }}</option>
+								<option
+									v-for="(d, index) in dayNames"
+									:key="index"
+									:value="index"
+								>
+									{{ d }}
+								</option>
 							</select>
 						</div>
 					</div>
@@ -46,7 +52,7 @@
 				<div class="field">
 					<label class="label">Today Button</label>
 					<label class="checkbox">
-						<input v-model="useTodayIcons" type="checkbox">
+						<input v-model="useTodayIcons" type="checkbox" />
 						Icons
 					</label>
 				</div>
@@ -54,14 +60,14 @@
 				<div class="field">
 					<label class="label">Themes</label>
 					<label class="checkbox">
-						<input v-model="useDefaultTheme" type="checkbox">
+						<input v-model="useDefaultTheme" type="checkbox" />
 						Default
 					</label>
 				</div>
 
 				<div class="field">
 					<label class="checkbox">
-						<input v-model="useHolidayTheme" type="checkbox">
+						<input v-model="useHolidayTheme" type="checkbox" />
 						Holidays
 					</label>
 				</div>
@@ -71,32 +77,34 @@
 				<div class="field">
 					<label class="label">Title</label>
 					<div class="control">
-						<input v-model="newEventTitle" class="input" type="text">
+						<input v-model="newItemTitle" class="input" type="text" />
 					</div>
 				</div>
 
 				<div class="field">
 					<label class="label">Start date</label>
 					<div class="control">
-						<input v-model="newEventStartDate" class="input" type="date">
+						<input v-model="newItemStartDate" class="input" type="date" />
 					</div>
 				</div>
 
 				<div class="field">
 					<label class="label">End date</label>
 					<div class="control">
-						<input v-model="newEventEndDate" class="input" type="date">
+						<input v-model="newItemEndDate" class="input" type="date" />
 					</div>
 				</div>
 
-				<button class="button is-info" @click="clickTestAddEvent">Add Event</button>
+				<button class="button is-info" @click="clickTestAddItem">
+					Add Item
+				</button>
 			</div>
 		</div>
 		<div class="calendar-parent">
 			<calendar-view
-				:events="events"
+				:events="items"
 				:show-date="showDate"
-				:time-format-options="{hour: 'numeric', minute:'2-digit'}"
+				:time-format-options="{ hour: 'numeric', minute: '2-digit' }"
 				:enable-drag-drop="true"
 				:disable-past="disablePast"
 				:disable-future="disableFuture"
@@ -109,7 +117,7 @@
 				:current-period-label="useTodayIcons ? 'icons' : ''"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
-				@click-event="onClickEvent"
+				@click-event="onClickItem"
 			>
 				<calendar-view-header
 					slot="header"
@@ -146,7 +154,7 @@ export default {
 	mixins: [CalendarMathMixin],
 	data() {
 		return {
-			/* Show the current month, and give it some fake events to show */
+			/* Show the current month, and give it some fake items to show */
 			showDate: this.thisMonth(1),
 			message: "",
 			startingDayOfWeek: 0,
@@ -155,13 +163,13 @@ export default {
 			displayPeriodUom: "month",
 			displayPeriodCount: 1,
 			showEventTimes: true,
-			newEventTitle: "",
-			newEventStartDate: "",
-			newEventEndDate: "",
+			newItemTitle: "",
+			newItemStartDate: "",
+			newItemEndDate: "",
 			useDefaultTheme: true,
 			useHolidayTheme: true,
 			useTodayIcons: false,
-			events: [
+			items: [
 				{
 					id: "e0",
 					startDate: "2018-01-05",
@@ -173,13 +181,13 @@ export default {
 				{
 					id: "e2",
 					startDate: this.thisMonth(15),
-					title: "Single-day event with a long title",
+					title: "Single-day item with a long title",
 				},
 				{
 					id: "e3",
 					startDate: this.thisMonth(7, 9, 25),
 					endDate: this.thisMonth(10, 16, 30),
-					title: "Multi-day event with a long title and times",
+					title: "Multi-day item with a long title and times",
 				},
 				{
 					id: "e4",
@@ -192,7 +200,7 @@ export default {
 					id: "e5",
 					startDate: this.thisMonth(5),
 					endDate: this.thisMonth(12),
-					title: "Multi-day event",
+					title: "Multi-day item",
 					classes: "purple",
 				},
 				{
@@ -252,16 +260,17 @@ export default {
 		},
 	},
 	mounted() {
-		this.newEventStartDate = this.isoYearMonthDay(this.today())
-		this.newEventEndDate = this.isoYearMonthDay(this.today())
+		this.newItemStartDate = this.isoYearMonthDay(this.today())
+		this.newItemEndDate = this.isoYearMonthDay(this.today())
 	},
 
 	methods: {
-		periodChanged(range, eventSource) {
+		periodChanged() {
+			// range, eventSource) {
 			// Demo does nothing with this information, just including the method to demonstrate how
-			// you can listen for changes to the displayed range and react to them (by loading events, etc.)
-			console.log(eventSource)
-			console.log(range)
+			// you can listen for changes to the displayed range and react to them (by loading items, etc.)
+			//console.log(eventSource)
+			//console.log(range)
 		},
 		thisMonth(d, h, m) {
 			const t = new Date()
@@ -270,33 +279,33 @@ export default {
 		onClickDay(d) {
 			this.message = `You clicked: ${d.toLocaleDateString()}`
 		},
-		onClickEvent(e) {
+		onClickItem(e) {
 			this.message = `You clicked: ${e.title}`
 		},
 		setShowDate(d) {
 			this.message = `Changing calendar view to ${d.toLocaleDateString()}`
 			this.showDate = d
 		},
-		onDrop(event, date) {
-			this.message = `You dropped ${event.id} on ${date.toLocaleDateString()}`
+		onDrop(item, date) {
+			this.message = `You dropped ${item.id} on ${date.toLocaleDateString()}`
 			// Determine the delta between the old start date and the date chosen,
-			// and apply that delta to both the start and end date to move the event.
-			const eLength = this.dayDiff(event.startDate, date)
-			event.originalEvent.startDate = this.addDays(event.startDate, eLength)
-			event.originalEvent.endDate = this.addDays(event.endDate, eLength)
+			// and apply that delta to both the start and end date to move the item.
+			const eLength = this.dayDiff(item.startDate, date)
+			item.originalEvent.startDate = this.addDays(item.startDate, eLength)
+			item.originalEvent.endDate = this.addDays(item.endDate, eLength)
 		},
-		clickTestAddEvent() {
-			this.events.push({
-				startDate: this.newEventStartDate,
-				endDate: this.newEventEndDate,
-				title: this.newEventTitle,
+		clickTestAddItem() {
+			this.items.push({
+				startDate: this.newItemStartDate,
+				endDate: this.newItemEndDate,
+				title: this.newItemTitle,
 				id:
 					"e" +
 					Math.random()
 						.toString(36)
 						.substr(2, 10),
 			})
-			this.message = "You added an event!"
+			this.message = "You added a calendar item!"
 		},
 	},
 }
@@ -347,7 +356,7 @@ body {
 
 /* These styles are optional, to illustrate the flexbility of styling the calendar purely with CSS. */
 
-/* Add some styling for events tagged with the "birthday" class */
+/* Add some styling for items tagged with the "birthday" class */
 .theme-default .cv-event.birthday {
 	background-color: #e0f0e0;
 	border-color: #d7e7d7;

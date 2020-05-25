@@ -50,10 +50,23 @@
 				</div>
 
 				<div class="field">
-					<label class="label">Today Button</label>
 					<label class="checkbox">
 						<input v-model="useTodayIcons" type="checkbox" />
-						Icons
+						Use icon for today's period
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input v-model="displayWeekNumbers" type="checkbox" />
+						Show week number
+					</label>
+				</div>
+
+				<div class="field">
+					<label class="checkbox">
+						<input v-model="showTimes" type="checkbox" />
+						Show times
 					</label>
 				</div>
 
@@ -102,22 +115,29 @@
 		</div>
 		<div class="calendar-parent">
 			<calendar-view
-				:events="items"
+				:items="items"
 				:show-date="showDate"
 				:time-format-options="{ hour: 'numeric', minute: '2-digit' }"
 				:enable-drag-drop="true"
 				:disable-past="disablePast"
 				:disable-future="disableFuture"
-				:show-event-times="showEventTimes"
+				:show-times="showTimes"
 				:display-period-uom="displayPeriodUom"
 				:display-period-count="displayPeriodCount"
 				:starting-day-of-week="startingDayOfWeek"
 				:class="themeClasses"
 				:period-changed-callback="periodChanged"
 				:current-period-label="useTodayIcons ? 'icons' : ''"
+				:displayWeekNumbers="displayWeekNumbers"
+				:enable-date-selection="true"
+				:selection-start="selectionStart"
+				:selection-end="selectionEnd"
+				@date-selection-start="setSelection"
+				@date-selection="setSelection"
+				@date-selection-finish="finishSelection"
 				@drop-on-date="onDrop"
 				@click-date="onClickDay"
-				@click-event="onClickItem"
+				@click-item="onClickItem"
 			>
 				<calendar-view-header
 					slot="header"
@@ -131,19 +151,19 @@
 </template>
 <script>
 // Load CSS from the published version
-require("vue-simple-calendar/static/css/default.css")
-require("vue-simple-calendar/static/css/holidays-us.css")
+//require("vue-simple-calendar/static/css/default.css")
+//require("vue-simple-calendar/static/css/holidays-us.css")
 
 // Load CSS from the local repo
-//require("../../vue-simple-calendar/static/css/default.css")
-//require("../../vue-simple-calendar/static/css/holidays-us.css")
+require("../../vue-simple-calendar/static/css/default.css")
+require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 import {
 	CalendarView,
 	CalendarViewHeader,
 	CalendarMathMixin,
-} from "vue-simple-calendar" // published version
-//} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
+	//} from "vue-simple-calendar" // published version
+} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
 
 export default {
 	name: "App",
@@ -162,7 +182,10 @@ export default {
 			disableFuture: false,
 			displayPeriodUom: "month",
 			displayPeriodCount: 1,
-			showEventTimes: true,
+			displayWeekNumbers: false,
+			showTimes: true,
+			selectionStart: null,
+			selectionEnd: null,
 			newItemTitle: "",
 			newItemStartDate: "",
 			newItemEndDate: "",
@@ -277,6 +300,8 @@ export default {
 			return new Date(t.getFullYear(), t.getMonth(), d, h || 0, m || 0)
 		},
 		onClickDay(d) {
+			this.selectionStart = null
+			this.selectionEnd = null
 			this.message = `You clicked: ${d.toLocaleDateString()}`
 		},
 		onClickItem(e) {
@@ -286,24 +311,28 @@ export default {
 			this.message = `Changing calendar view to ${d.toLocaleDateString()}`
 			this.showDate = d
 		},
+		setSelection(dateRange) {
+			this.selectionEnd = dateRange[1]
+			this.selectionStart = dateRange[0]
+		},
+		finishSelection(dateRange) {
+			this.setSelection(dateRange)
+			this.message = `You selected: ${this.selectionStart.toLocaleDateString()} -${this.selectionEnd.toLocaleDateString()}`
+		},
 		onDrop(item, date) {
 			this.message = `You dropped ${item.id} on ${date.toLocaleDateString()}`
 			// Determine the delta between the old start date and the date chosen,
 			// and apply that delta to both the start and end date to move the item.
 			const eLength = this.dayDiff(item.startDate, date)
-			item.originalEvent.startDate = this.addDays(item.startDate, eLength)
-			item.originalEvent.endDate = this.addDays(item.endDate, eLength)
+			item.originalItem.startDate = this.addDays(item.startDate, eLength)
+			item.originalItem.endDate = this.addDays(item.endDate, eLength)
 		},
 		clickTestAddItem() {
 			this.items.push({
 				startDate: this.newItemStartDate,
 				endDate: this.newItemEndDate,
 				title: this.newItemTitle,
-				id:
-					"e" +
-					Math.random()
-						.toString(36)
-						.substr(2, 10),
+				id: "e" + Math.random().toString(36).substr(2, 10),
 			})
 			this.message = "You added a calendar item!"
 		},
@@ -357,12 +386,12 @@ body {
 /* These styles are optional, to illustrate the flexbility of styling the calendar purely with CSS. */
 
 /* Add some styling for items tagged with the "birthday" class */
-.theme-default .cv-event.birthday {
+.theme-default .cv-item.birthday {
 	background-color: #e0f0e0;
 	border-color: #d7e7d7;
 }
 
-.theme-default .cv-event.birthday::before {
+.theme-default .cv-item.birthday::before {
 	content: "\1F382"; /* Birthday cake */
 	margin-right: 0.5em;
 }

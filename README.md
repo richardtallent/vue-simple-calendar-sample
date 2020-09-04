@@ -39,3 +39,4 @@ npm run build
 | 2019.01.25 | 4.2.1   | Upgrade component to 4.2.1, update other dependencies           |
 | 2019.05.01 | 4.2.2   | Upgrade component to 4.2.2, update other dependencies           |
 | 2019.11.24 | 4.3.2   | Upgrade component to 4.3.2, update other dependencies           |
+| 2020.09.04 | 5.0.0   | Upgrade component to 5.0.0, update other dependencies           |

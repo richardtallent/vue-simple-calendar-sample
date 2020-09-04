@@ -151,19 +151,19 @@
 </template>
 <script>
 // Load CSS from the published version
-//require("vue-simple-calendar/static/css/default.css")
-//require("vue-simple-calendar/static/css/holidays-us.css")
+require("vue-simple-calendar/static/css/default.css")
+require("vue-simple-calendar/static/css/holidays-us.css")
 
 // Load CSS from the local repo
-require("../../vue-simple-calendar/static/css/default.css")
-require("../../vue-simple-calendar/static/css/holidays-us.css")
+//require("../../vue-simple-calendar/static/css/default.css")
+//require("../../vue-simple-calendar/static/css/holidays-us.css")
 
 import {
 	CalendarView,
 	CalendarViewHeader,
 	CalendarMathMixin,
-	//} from "vue-simple-calendar" // published version
-} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
+} from "vue-simple-calendar" // published version
+//} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
 
 export default {
 	name: "App",

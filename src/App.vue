@@ -283,6 +283,11 @@ export default {
 			}
 		},
 		myDateClasses() {
+			// This was added to demonstrate the dateClasses prop. Note in particular that the
+			// keys of the object are `yyyy-mm-dd` ISO date strings (not dates), and the values
+			// for those keys are string **arrays**. Keep in mind that your CSS to style these
+			// may need to be fairly specific to make it override your theme's styles. See the
+			// CSS at the bottom of this component to see how these are styled.
 			const o = {}
 			const theFirst = this.thisMonth(1)
 			const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13
@@ -409,14 +414,13 @@ body {
 	margin-right: 0.5em;
 }
 
+/* The following classes style the classes computed in myDateClasses and passed to the component's dateClasses prop. */
 .theme-default .cv-day.ides {
 	background-color: #ffe0e0;
 }
-
 .ides .cv-day-number::before {
 	content: "\271D";
 }
-
 .theme-default .cv-day.do-you-remember.the-21st .cv-day-number::after {
 	content: "\1F30D\1F32C\1F525";
 }

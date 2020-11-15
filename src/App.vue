@@ -122,6 +122,7 @@
 				:disable-past="disablePast"
 				:disable-future="disableFuture"
 				:show-times="showTimes"
+				:date-classes="myDateClasses"
 				:display-period-uom="displayPeriodUom"
 				:display-period-count="displayPeriodCount"
 				:starting-day-of-week="startingDayOfWeek"
@@ -281,6 +282,18 @@ export default {
 				"holiday-us-official": this.useHolidayTheme,
 			}
 		},
+		myDateClasses() {
+			const o = {}
+			const theFirst = this.thisMonth(1)
+			const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13
+			const idesDate = this.thisMonth(ides)
+			o[this.isoYearMonthDay(idesDate)] = ["ides"]
+			o[this.isoYearMonthDay(this.thisMonth(21))] = [
+				"do-you-remember",
+				"the-21st",
+			]
+			return o
+		},
 	},
 	mounted() {
 		this.newItemStartDate = this.isoYearMonthDay(this.today())
@@ -394,5 +407,17 @@ body {
 .theme-default .cv-item.birthday::before {
 	content: "\1F382"; /* Birthday cake */
 	margin-right: 0.5em;
+}
+
+.theme-default .cv-day.ides {
+	background-color: #ffe0e0;
+}
+
+.ides .cv-day-number::before {
+	content: "\271D";
+}
+
+.theme-default .cv-day.do-you-remember.the-21st .cv-day-number::after {
+	content: "\1F30D\1F32C\1F525";
 }
 </style>

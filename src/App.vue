@@ -37,11 +37,7 @@
 					<div class="control">
 						<div class="select">
 							<select v-model="startingDayOfWeek">
-								<option
-									v-for="(d, index) in dayNames"
-									:key="index"
-									:value="index"
-								>
+								<option v-for="(d, index) in dayNames" :key="index" :value="index">
 									{{ d }}
 								</option>
 							</select>
@@ -108,9 +104,7 @@
 					</div>
 				</div>
 
-				<button class="button is-info" @click="clickTestAddItem">
-					Add Item
-				</button>
+				<button class="button is-info" @click="clickTestAddItem">Add Item</button>
 			</div>
 		</div>
 		<div class="calendar-parent">
@@ -140,30 +134,23 @@
 				@click-date="onClickDay"
 				@click-item="onClickItem"
 			>
-				<calendar-view-header
-					slot="header"
-					slot-scope="{ headerProps }"
-					:header-props="headerProps"
-					@input="setShowDate"
-				/>
+				<template #header="{ headerProps }">
+					<calendar-view-header slot="header" :header-props="headerProps" @input="setShowDate" />
+				</template>
 			</calendar-view>
 		</div>
 	</div>
 </template>
 <script>
 // Load CSS from the published version
-require("vue-simple-calendar/static/css/default.css")
-require("vue-simple-calendar/static/css/holidays-us.css")
-
+import "../node_modules/vue-simple-calendar/dist/style.css"
+import "../node_modules/vue-simple-calendar/static/css/default.css"
+import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
 // Load CSS from the local repo
 //require("../../vue-simple-calendar/static/css/default.css")
 //require("../../vue-simple-calendar/static/css/holidays-us.css")
 
-import {
-	CalendarView,
-	CalendarViewHeader,
-	CalendarMathMixin,
-} from "vue-simple-calendar" // published version
+import { CalendarView, CalendarViewHeader, CalendarMath } from "vue-simple-calendar" // published version
 //} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
 
 export default {
@@ -172,7 +159,6 @@ export default {
 		CalendarView,
 		CalendarViewHeader,
 	},
-	mixins: [CalendarMathMixin],
 	data() {
 		return {
 			/* Show the current month, and give it some fake items to show */
@@ -270,10 +256,10 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			return this.getDefaultBrowserLocale
+			return CalendarMath.getDefaultBrowserLocale
 		},
 		dayNames() {
-			return this.getFormattedWeekdayNames(this.userLocale, "long", 0)
+			return CalendarMath.getFormattedWeekdayNames(this.userLocale, "long", 0)
 		},
 		themeClasses() {
 			return {
@@ -292,17 +278,14 @@ export default {
 			const theFirst = this.thisMonth(1)
 			const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13
 			const idesDate = this.thisMonth(ides)
-			o[this.isoYearMonthDay(idesDate)] = "ides"
-			o[this.isoYearMonthDay(this.thisMonth(21))] = [
-				"do-you-remember",
-				"the-21st",
-			]
+			o[CalendarMath.isoYearMonthDay(idesDate)] = "ides"
+			o[CalendarMath.isoYearMonthDay(this.thisMonth(21))] = ["do-you-remember", "the-21st"]
 			return o
 		},
 	},
 	mounted() {
-		this.newItemStartDate = this.isoYearMonthDay(this.today())
-		this.newItemEndDate = this.isoYearMonthDay(this.today())
+		this.newItemStartDate = CalendarMath.isoYearMonthDay(CalendarMath.today())
+		this.newItemEndDate = CalendarMath.isoYearMonthDay(CalendarMath.today())
 	},
 
 	methods: {
@@ -341,9 +324,9 @@ export default {
 			this.message = `You dropped ${item.id} on ${date.toLocaleDateString()}`
 			// Determine the delta between the old start date and the date chosen,
 			// and apply that delta to both the start and end date to move the item.
-			const eLength = this.dayDiff(item.startDate, date)
-			item.originalItem.startDate = this.addDays(item.startDate, eLength)
-			item.originalItem.endDate = this.addDays(item.endDate, eLength)
+			const eLength = CalendarMath.dayDiff(item.startDate, date)
+			item.originalItem.startDate = CalendarMath.addDays(item.startDate, eLength)
+			item.originalItem.endDate = CalendarMath.addDays(item.endDate, eLength)
 		},
 		clickTestAddItem() {
 			this.items.push({
@@ -418,10 +401,12 @@ body {
 .theme-default .cv-day.ides {
 	background-color: #ffe0e0;
 }
+
 .ides .cv-day-number::before {
 	content: "\271D";
 }
-.theme-default .cv-day.do-you-remember.the-21st .cv-day-number::after {
+
+.cv-day.do-you-remember.the-21st .cv-day-number::after {
 	content: "\1F30D\1F32C\1F525";
 }
 </style>

@@ -41,3 +41,4 @@ npm run build
 | 2019.11.24 | 4.3.2    | Upgrade component to 4.3.2, update other dependencies           |
 | 2020.09.04 | 5.0.0    | Upgrade component to 5.0.0, update other dependencies           |
 | 2021.02.14 | 6.0.0-b3 | Upgrade component to 6.0.0-b3, Vite, Vue 3, TS                  |
+| 2021.11.20 | 6.0.3    | Upgrade component to 6.0.3                                      |

@@ -143,15 +143,21 @@
 </template>
 <script>
 // Load CSS from the published version
-import "../node_modules/vue-simple-calendar/dist/style.css"
-import "../node_modules/vue-simple-calendar/static/css/default.css"
-import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
+//import "../node_modules/vue-simple-calendar/dist/style.css"
+//import "../node_modules/vue-simple-calendar/static/css/default.css"
+//import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
 // Load CSS from the local repo
-//require("../../vue-simple-calendar/static/css/default.css")
-//require("../../vue-simple-calendar/static/css/holidays-us.css")
+import "../../vue-simple-calendar/dist/css/default.css"
+import "../../vue-simple-calendar/dist/css/holidays-us.css"
 
-import { CalendarView, CalendarViewHeader, CalendarMath } from "vue-simple-calendar" // published version
-//} from "../../vue-simple-calendar/src/components/bundle.js" // local repo
+//import "../node_modules/vue-simple-calendar/dist/style.css"
+//import "../node_modules/vue-simple-calendar/static/css/default.css"
+//import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
+
+//import { CalendarView, CalendarViewHeader, CalendarMath } from "vue-simple-calendar" // published version
+import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue" // local repo
+import CalendarViewHeader from "../../vue-simple-calendar/src/CalendarViewHeader.vue" // local repo
+import CalendarMath from "../../vue-simple-calendar/src/CalendarMath" // local repo
 
 export default {
 	name: "App",
@@ -180,10 +186,10 @@ export default {
 			useHolidayTheme: true,
 			useTodayIcons: false,
 			items: [
-				{
+				/*{
 					id: "e0",
 					startDate: "2018-01-05",
-				},
+				},*/
 				{
 					id: "e1",
 					startDate: this.thisMonth(15, 18, 30),
@@ -212,6 +218,7 @@ export default {
 					endDate: this.thisMonth(12),
 					title: "Multi-day item",
 					classes: "purple",
+					tooltip: "This spans multiple days",
 				},
 				{
 					id: "foo",

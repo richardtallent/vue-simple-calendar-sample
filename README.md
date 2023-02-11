@@ -43,3 +43,4 @@ npm run build
 | 2021.02.14 | 6.0.0-b3 | Upgrade component to 6.0.0-b3, Vite, Vue 3, TS                  |
 | 2021.11.20 | 6.0.3    | Upgrade component to 6.0.3                                      |
 | 2022.08.12 | 6.0.7    | Upgrade component to 6.0.7                                      |
+| 2023.02.11 | 6.3.1    | Upgrade component to 6.3.1, fix TS issues                       |

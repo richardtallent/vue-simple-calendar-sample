@@ -209,7 +209,7 @@ export default {
 					id: "e4",
 					startDate: this.thisMonth(20),
 					title: "My Birthday!",
-					classes: "birthday",
+					classes: ["birthday"],
 					url: "https://en.wikipedia.org/wiki/Birthday",
 				},
 				{
@@ -217,7 +217,7 @@ export default {
 					startDate: this.thisMonth(5),
 					endDate: this.thisMonth(12),
 					title: "Multi-day item",
-					classes: "purple",
+					classes: ["purple"],
 					tooltip: "This spans multiple days",
 				},
 				{
@@ -229,7 +229,7 @@ export default {
 					id: "e6",
 					startDate: this.thisMonth(29),
 					title: "Same day 2",
-					classes: "orange",
+					classes: ["orange"],
 				},
 				{
 					id: "e7",
@@ -240,7 +240,7 @@ export default {
 					id: "e8",
 					startDate: this.thisMonth(29),
 					title: "Same day 4",
-					classes: "orange",
+					classes: ["orange"],
 				},
 				{
 					id: "e9",
@@ -251,7 +251,7 @@ export default {
 					id: "e10",
 					startDate: this.thisMonth(29),
 					title: "Same day 6",
-					classes: "orange",
+					classes: ["orange"],
 				},
 				{
 					id: "e11",

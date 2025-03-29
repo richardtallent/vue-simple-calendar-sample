@@ -45,3 +45,4 @@ npm run build
 | 2022.08.12 | 6.0.7    | Upgrade component to 6.0.7                                      |
 | 2023.02.11 | 6.3.1    | Upgrade component to 6.3.1, fix TS issues                       |
 | 2024.01.14 | 7.0.0    | Upgrade component to 7.0.0                                      |
+| 2024.03.29 | 7.2.1    | Upgrade component to 7.2.1, fix sample classes                  |

@@ -135,29 +135,18 @@
 				@click-item="onClickItem"
 			>
 				<template #header="{ headerProps }">
-					<calendar-view-header slot="header" :header-props="headerProps" @input="setShowDate" />
+					<calendar-view-header :header-props="headerProps" @input="setShowDate" />
 				</template>
 			</calendar-view>
 		</div>
 	</div>
 </template>
 <script>
-// Load CSS from the published version
-//import "../node_modules/vue-simple-calendar/dist/style.css"
-//import "../node_modules/vue-simple-calendar/static/css/default.css"
-//import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
-// Load CSS from the local repo
-import "../../vue-simple-calendar/dist/css/default.css"
-import "../../vue-simple-calendar/dist/css/holidays-us.css"
-
-//import "../node_modules/vue-simple-calendar/dist/style.css"
-//import "../node_modules/vue-simple-calendar/static/css/default.css"
-//import "../node_modules/vue-simple-calendar/static/css/holidays-us.css"
-
-//import { CalendarView, CalendarViewHeader, CalendarMath } from "vue-simple-calendar" // published version
-import CalendarView from "../../vue-simple-calendar/src/CalendarView.vue" // local repo
-import CalendarViewHeader from "../../vue-simple-calendar/src/CalendarViewHeader.vue" // local repo
-import CalendarMath from "../../vue-simple-calendar/src/CalendarMath" // local repo
+import "vue-simple-calendar/dist/vue-simple-calendar.css"
+import "vue-simple-calendar/dist/css/default.css"
+import "vue-simple-calendar/dist/css/holidays-us.css"
+import "vue-simple-calendar/dist/css/holidays-ue.css"
+import { CalendarView, CalendarViewHeader, CalendarMath } from "vue-simple-calendar"
 
 export default {
 	name: "App",
@@ -263,7 +252,7 @@ export default {
 	},
 	computed: {
 		userLocale() {
-			return CalendarMath.getDefaultBrowserLocale
+			return CalendarMath.getDefaultBrowserLocale()
 		},
 		dayNames() {
 			return CalendarMath.getFormattedWeekdayNames(this.userLocale, "long", 0)
@@ -273,6 +262,7 @@ export default {
 				"theme-default": this.useDefaultTheme,
 				"holiday-us-traditional": this.useHolidayTheme,
 				"holiday-us-official": this.useHolidayTheme,
+				"holiday-ue": this.useUkrainianHolidayTheme,
 			}
 		},
 		myDateClasses() {
@@ -282,11 +272,9 @@ export default {
 			// may need to be fairly specific to make it override your theme's styles. See the
 			// CSS at the bottom of this component to see how these are styled.
 			const o = {}
-			const theFirst = this.thisMonth(1)
-			const ides = [2, 4, 6, 9].includes(theFirst.getMonth()) ? 15 : 13
-			const idesDate = this.thisMonth(ides)
-			o[CalendarMath.isoYearMonthDay(idesDate)] = "ides"
-			o[CalendarMath.isoYearMonthDay(this.thisMonth(21))] = ["do-you-remember", "the-21st"]
+			const year = this.showDate.getFullYear()
+			o[CalendarMath.isoYearMonthDay(new Date(year, 2, 15))] = "ides"
+			o[CalendarMath.isoYearMonthDay(new Date(year, 8, 21))] = ["do-you-remember", "the-21st"]
 			return o
 		},
 	},
@@ -325,7 +313,7 @@ export default {
 		},
 		finishSelection(dateRange) {
 			this.setSelection(dateRange)
-			this.message = `You selected: ${this.selectionStart.toLocaleDateString()} -${this.selectionEnd.toLocaleDateString()}`
+			this.message = `You selected: ${this.selectionStart.toLocaleDateString()} - ${this.selectionEnd.toLocaleDateString()}`
 		},
 		onDrop(item, date) {
 			this.message = `You dropped ${item.id} on ${date.toLocaleDateString()}`
@@ -340,7 +328,7 @@ export default {
 				startDate: this.newItemStartDate,
 				endDate: this.newItemEndDate,
 				title: this.newItemTitle,
-				id: "e" + Math.random().toString(36).substr(2, 10),
+				id: "e" + Math.random().toString(36).slice(2, 12),
 			})
 			this.message = "You added a calendar item!"
 		},
@@ -413,7 +401,10 @@ body {
 	content: "\271D";
 }
 
-.cv-day.do-you-remember.the-21st .cv-day-number::after {
+/* Not ::after, which the component uses for its hover popup. Floated right so the icons trail the day number. */
+.cv-day.do-you-remember.the-21st .cv-day-number::before {
+	float: right;
+	margin-right: 0;
 	content: "\1F30D\1F32C\1F525";
 }
 </style>

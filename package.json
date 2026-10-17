@@ -1,6 +1,6 @@
 {
 	"name": "vue-simple-calendar-sample",
-	"version": "7.2.1",
+	"version": "7.3.0",
 	"private": false,
 	"description": "Sample app showing off the vue-simple-calendar component",
 	"author": "richardtallent <richard@tallent.us>",
@@ -15,35 +15,26 @@
 		"build": "vite build"
 	},
 	"dependencies": {
-		"vue": "^3.5.13",
-		"vue-simple-calendar": "^7.2.1"
+		"vue": "^3.5.44",
+		"vue-simple-calendar": "^7.3.0"
 	},
 	"devDependencies": {
-		"@vitejs/plugin-basic-ssl": "^2.0.0",
-		"@typescript-eslint/parser": "^8.28.0",
-		"@vitejs/plugin-vue": "^5.2.3",
-		"@vue/compiler-sfc": "^3.5.13",
-		"autoprefixer": "^10.4.21",
-		"eslint": "^9.23.0",
-		"eslint-plugin-prettier": "^5.2.5",
-		"eslint-plugin-vue": "^10.0.0",
-		"postcss": "^8.5.3",
-		"prettier": "^3.5.3",
-		"rollup-plugin-typescript2": "^0.36.0",
-		"stylelint": "^16.17.0",
-		"stylelint-config-standard": "^37.0.0",
-		"typescript": "^5.8.2",
-		"vite": "^6.2.3"
-	},
-	"eslintConfig": {
-		"extends": [
-			"plugin:vue/vue3-essential",
-			"eslint:recommended",
-			"@vue/prettier"
-		],
-		"parserOptions": {
-			"parser": "@typescript-eslint/parser"
-		}
+		"@eslint/js": "^10.0.1",
+		"@typescript-eslint/parser": "^8.71.2",
+		"@vitejs/plugin-basic-ssl": "^2.3.0",
+		"@vitejs/plugin-vue": "^6.0.10",
+		"@vue/compiler-sfc": "^3.5.44",
+		"autoprefixer": "^10.6.1",
+		"eslint": "^10.13.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.7",
+		"eslint-plugin-vue": "^10.11.1",
+		"globals": "^17.13.0",
+		"postcss": "^8.5.30",
+		"prettier": "^3.9.10",
+		"rollup-plugin-typescript2": "^0.37.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.4"
 	},
 	"prettier": {
 		"useTabs": true,
@@ -56,15 +47,6 @@
 	"postcss": {
 		"plugins": {
 			"autoprefixer": {}
-		}
-	},
-	"stylelint": {
-		"extends": "stylelint-config-standard",
-		"exclude": [
-			"dist"
-		],
-		"rules": {
-			"no-descending-specificity": null
 		}
 	},
 	"browserslist": [
